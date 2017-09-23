@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- A tag base é importante quando usamos o sistema de rotas do Angular 2. --> 
+        <base href="/">
+
+        <title>Alurapic</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+        
+        <script src="node_modules/core-js/client/shim.min.js"></script>
+
+        <script src="node_modules/zone.js/dist/zone.js"></script>
+        <script src="node_modules/reflect-metadata/Reflect.js"></script>
+
+        <!-- loader iniciar 
+        Usaremos o systermjs para carregar os arquivos necessarios, sem q precisamos incluir aqui todos os import 
+        systemjs vai carregar -> app
+        app esta definido dentro do systemjs.config.js
+        systemjs.config.js esta apontando para main.js (main.ts) 
+        main.ts -> esse arquivo é uma especie de boot da aplicação, é dentro dele que indicamos qual modulo deve ser criado primeiro
+        -->
+        <script src="node_modules/systemjs/dist/system.src.js"></script>
+        
+        <script src="systemjs.config.js"></script>
+        <script>
+            System.import('app').catch(function(err){ console.error(err); });
+        </script>
+
+        <!-- loader fim -->
+    </head>
+    <body>
+        <app>Carregando</app>
+    </body>
+</html>

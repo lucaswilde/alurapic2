@@ -1,0 +1,44 @@
+<div class="jumbotron">
+    <h1 class="text-center">Alurapic</h1>
+</div>
+<div class="container">
+    <div class="row">
+        <!-- usa 12 colunas do bootstrap-->
+        <div class="col-md-12">
+            <form>
+                    <div class="input-group">
+                    <span class="input-group-btn">
+                        <!--
+                        <a href="/cadastro" class="btn btn-primary">
+
+                            routerlink evita o recarregamento da página e carrega somente o componente cadastro
+                            Como ela é somente leitura, fica entre colchetes:
+                        -->
+                        <a [routerLink]="['/cadastro']" class="btn btn-primary">
+                            Nova foto
+                        </a>
+                    </span>
+
+                    <!-- no angular podemos criar variaves locais diretamente no template da diretiva usando # (tambem pode ser usado var-)
+                    
+                    Angular só atualizará a view em resposta a um evento assíncrono. 
+                    Veja, evento! Quando digitamos no campo, não estamos disparando evento algum. 
+                    Vamos dispararmos um evento de mentirinha, que nada faz mas que sinalizará para o Angular atualizar a view
+                    
+                    (keyup)="0" parenteses indicam "one way data binding".
+                    Toda vez que digitarmos no campo, o evento keyup que nada faz será disparado e mesmo não executando lógica nenhuma, 
+                    fará com que o Angular atualize nossa view e por conseguinte a nossa lista filtrada.
+                    -->
+                    <input class="form-control" #textoProcurado (keyup)="0" placeholder="Filtrar pelo titulo">
+                </div> 
+            </form>
+        </div> <!-- fim col-md-12 -->
+    </div> <!-- fim row -->
+    <br>
+    <div class="row">
+        <painel *ngFor="let foto of fotos | filtroPorTitulo:textoProcurado.value" titulo="{{foto.titulo | uppercase}}" class="col-md-2">
+            <foto titulo="{{foto.titulo}}" url="{{foto.url}}">
+            </foto>
+        </painel>
+    </div><!-- fim row -->
+</div>
