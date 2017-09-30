@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
+import { FotoComponent } from '../foto/foto.component';
+import { FotoService } from '../foto/foto.service';
 
 @Component({
     moduleId: module.id,
@@ -9,13 +11,17 @@ import { Http } from '@angular/http';
 export class ListagemComponent{
     //fotos : Array<Object> = [];
     // outra forma de declarar um array, esse de forma menos verbosa
-    fotos : Object[] = [];
+    //fotos : Object[] = [];
+    
+    fotos : FotoComponent[] = [];
+    service: FotoService;
+    mensagem: string = '';
     
         // a injeção de dependencia pode ser feita de 2 formas (funciona porque estamos tipando as variaveis)
         // constructor(@Inject(Http) http) {
         // ou
-        constructor(http : Http) {
-    
+        constructor(service : FotoService) {
+
             /* comentado para usar arrow function
     
             var that = this; // aqui o this do construtor é a instância da classe Foto
@@ -37,7 +43,7 @@ export class ListagemComponent{
             });
             */
             // disponibilizarmos para a função subscribe a lista de fotos já parseada (usando a função map)
-            http.get('v1/fotos')
+            /*http.get('v1/fotos')
                 .map(res => res.json())     
                 .subscribe(
                     fotos => {
@@ -46,5 +52,34 @@ export class ListagemComponent{
                     },
                     erro => console.log(erro)
                 );
+            */
+            this.service = service;
+            this.service.lista().subscribe(
+                fotos => this.fotos = fotos,
+                erro => console.log(erro)              
+            );
+        }
+
+        remove(foto:FotoComponent){
+            this.service.remove(foto).subscribe(
+                () => {
+                    let novaFotos = this.fotos.slice(0); // copia a lista de fotos para outro objeto
+                    let indice = novaFotos.indexOf(foto);
+                    novaFotos.splice(indice, 1); // remova foto da lista
+                    this.fotos = novaFotos; // o angular precisa receber um novo objecto para identificar que ele deve atualizar a tela
+                    this.mensagem = "Foto removida com sucesso";
+                    /*
+                    let novasFotos = this.fotos.slice(0);
+                    let indice = novasFotos.indexOf(foto);
+                    novasFotos.splice(indice, 1);
+                    this.fotos = novasFotos;
+                    this.mensagem = 'Foto removida com sucesso';
+                    */
+                }
+                , erro => {
+                    console.log(erro);
+                    this.mensagem = "Não foi possível remover a foto";
+                }
+            );
         }
 }

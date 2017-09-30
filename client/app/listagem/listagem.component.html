@@ -3,6 +3,7 @@
 </div>
 <div class="container">
     <div class="row">
+        <p *ngIf="mensagem.length" class="alert alert-info">{{mensagem}}</p>
         <!-- usa 12 colunas do bootstrap-->
         <div class="col-md-12">
             <form>
@@ -39,6 +40,8 @@
         <painel *ngFor="let foto of fotos | filtroPorTitulo:textoProcurado.value" titulo="{{foto.titulo | uppercase}}" class="col-md-2">
             <foto titulo="{{foto.titulo}}" url="{{foto.url}}">
             </foto>
+            <br>
+            <button class="btn btn-block" (click)="remove(foto)" >Remover</button>
         </painel>
     </div><!-- fim row -->
 </div>

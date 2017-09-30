@@ -14,5 +14,6 @@ export class FotoComponent{
     @Input() url : string = '';
     // esta propriedade não usará o decorator Input, pois só queremos que o componente <foto></foto> receba apenas a URL e o título como parâmetros
     descricao : string = '';
+    _id : string;
 
 }
