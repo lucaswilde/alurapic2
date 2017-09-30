@@ -51,10 +51,13 @@ export class CadastroComponent {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        this.service.cadastra(this.foto).subscribe(()=>{
+        this.service.cadastra(this.foto).subscribe(res =>{
             this.foto = new FotoComponent();
+            this.mensagem = res.mensagem;
             console.log('Foto salva com sucesso');
-            this.router.navigate([""]);
+            if(!res.inclusao{
+                this.router.navigate([""]);
+            }
         }, erro => {
             console.log(erro);
         })
