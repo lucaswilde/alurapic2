@@ -1,8 +1,8 @@
 <div class="container">
+    <p *ngIf="mensagem.length" class="alert alert-info">{{mensagem}}</p>
     <form [formGroup]="meuForm" (submit)="cadastrar($event)" class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label>Título</label>
                 <!-- target é o "alvo do evento, ou seja, quem disparou o evento"
                 one way data biding pode ser feito da view para o model ou do modele para a view
                 () (event data binding) view para o dados

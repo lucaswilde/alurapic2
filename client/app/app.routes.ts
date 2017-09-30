@@ -7,6 +7,8 @@ const appRoutes: Routes = [
     { path: '', component: ListagemComponent },
     // http://localhost:3000/cadastro
     { path: 'cadastro', component: CadastroComponent },
+    //:id - curinga
+    { path: 'cadastro/:id', component: CadastroComponent },
     // redireciona para o padrão caso não encontre o path, ex.: http://localhost:3000/abcde
     { path: '**', redirectTo: ''}
 ];
