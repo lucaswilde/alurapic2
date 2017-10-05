@@ -11,6 +11,7 @@ import { CadastroComponent } from './cadastro/cadastro.component';
 import { ListagemComponent } from './listagem/listagem.component';
 import { routing } from './app.routes';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BotaoModule } from './botao/botao.module';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         , routing
         , FormsModule 
         , ReactiveFormsModule
+        , BotaoModule
     ],
     // Todos os componentes que fizerem parte do módulo, precisam ser registrados em declarations. 
     // quando o módulo da aplicação for carregado, precisamos indicar qual será o primeiro componente carregado, 

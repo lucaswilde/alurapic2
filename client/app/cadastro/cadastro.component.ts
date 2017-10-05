@@ -55,7 +55,7 @@ export class CadastroComponent {
             this.foto = new FotoComponent();
             this.mensagem = res.mensagem;
             console.log('Foto salva com sucesso');
-            if(!res.inclusao{
+            if(!res.inclusao){
                 this.router.navigate([""]);
             }
         }, erro => {
