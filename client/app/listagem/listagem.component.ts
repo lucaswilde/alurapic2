@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { FotoComponent } from '../foto/foto.component';
 import { FotoService } from '../foto/foto.service';
+import { PainelComponent } from '../painel/painel.component';
 
 @Component({
     moduleId: module.id,
@@ -60,14 +61,19 @@ export class ListagemComponent{
             );
         }
 
-        remove(foto:FotoComponent){
+        remove(foto:FotoComponent, painel:PainelComponent){
             this.service.remove(foto).subscribe(
                 () => {
-                    let novaFotos = this.fotos.slice(0); // copia a lista de fotos para outro objeto
-                    let indice = novaFotos.indexOf(foto);
-                    novaFotos.splice(indice, 1); // remova foto da lista
-                    this.fotos = novaFotos; // o angular precisa receber um novo objecto para identificar que ele deve atualizar a tela
-                    this.mensagem = "Foto removida com sucesso";
+                    // adiciona a callback para fadeout, ou seja, após chamar o serviço de remover, chama o fadeout (efeito na tela)
+                    // e ao terminar o fadeout executa a callback abaixo
+                    painel.fadeOut( ()=>{                        
+                        let novaFotos = this.fotos.slice(0); // copia a lista de fotos para outro objeto
+                        let indice = novaFotos.indexOf(foto);
+                        novaFotos.splice(indice, 1); // remova foto da lista
+                        this.fotos = novaFotos; // o angular precisa receber um novo objecto para identificar que ele deve atualizar a tela
+                        this.mensagem = "Foto removida com sucesso";
+                    }
+                    )
                     /*
                     let novasFotos = this.fotos.slice(0);
                     let indice = novasFotos.indexOf(foto);
